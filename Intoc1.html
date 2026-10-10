@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Practice Daily — Stage 1 (30 Days)</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    line-height: 1.6;
+    padding: 16px;
+  }
+  .container { max-width: 820px; margin: 0 auto; }
+
+  header {
+    text-align: center;
+    padding: 24px 18px;
+    background: linear-gradient(135deg, #1e293b, #334155);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    border: 1px solid #475569;
+  }
+  header h1 { font-size: 1.5rem; color: #38bdf8; margin-bottom: 6px; }
+  header p { color: #94a3b8; font-size: 0.9rem; }
+
+  .progress-bar {
+    width: 100%; height: 10px; background: #1e293b;
+    border-radius: 5px; margin-top: 16px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #38bdf8, #818cf8);
+    width: 0%; transition: width 0.3s ease;
+  }
+  .progress-text {
+    font-size: 0.8rem; color: #64748b;
+    margin-top: 6px; text-align: center;
+  }
+
+  .week-header {
+    margin: 24px 0 12px;
+    padding: 14px 18px;
+    background: #1e293b;
+    border-radius: 12px;
+    border-left: 4px solid #818cf8;
+  }
+  .week-header h2 {
+    font-size: 1rem;
+    color: #c7d2fe;
+    margin-bottom: 4px;
+  }
+  .week-header p {
+    font-size: 0.82rem;
+    color: #94a3b8;
+  }
+
+  .day-card {
+    background: #1e293b;
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 12px;
+    border-left: 4px solid #38bdf8;
+    transition: all 0.2s;
+  }
+  .day-card.speaking { border-left-color: #f472b6; }
+  .day-card.writing { border-left-color: #34d399; }
+  .day-card.review { border-left-color: #fbbf24; }
+
+  .day-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 10px; flex-wrap: wrap; gap: 8px;
+  }
+  .day-number { font-size: 1rem; font-weight: 700; color: #f1f5f9; }
+  .badge {
+    font-size: 0.65rem; font-weight: 700; padding: 4px 10px;
+    border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .badge.speaking { background: #831843; color: #fbcfe8; }
+  .badge.writing { background: #064e3b; color: #a7f3d0; }
+  .badge.review { background: #78350f; color: #fde68a; }
+
+  .task {
+    margin-bottom: 6px; padding-left: 18px; position: relative;
+    color: #cbd5e1; font-size: 0.88rem;
+  }
+  .task::before {
+    content: "→"; position: absolute; left: 0;
+    color: #38bdf8; font-weight: bold;
+  }
+
+  .prompt-box {
+    background: #172554;
+    border: 1px solid #1e40af;
+    border-radius: 8px;
+    padding: 12px;
+    margin-top: 12px;
+    font-size: 0.85rem;
+  }
+  .prompt-box .prompt-title {
+    color: #60a5fa;
+    font-weight: 700;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .prompt-box .prompt-text {
+    color: #dbeafe;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  .input-area { margin-top: 12px; }
+  .input-area label {
+    display: block;
+    font-size: 0.72rem;
+    color: #94a3b8;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+  .input-area textarea {
+    width: 100%;
+    min-height: 70px;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 10px;
+    color: #e2e8f0;
+    font-family: inherit;
+    font-size: 0.88rem;
+    resize: vertical;
+    line-height: 1.5;
+    transition: border-color 0.2s;
+  }
+  .input-area textarea:focus {
+    outline: none;
+    border-color: #38bdf8;
+  }
+  .saved-indicator {
+    font-size: 0.7rem;
+    color: #34d399;
+    margin-top: 3px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .saved-indicator.show { opacity: 1; }
+
+  .checkbox-row {
+    display: flex; align-items: center; gap: 10px;
+    margin-top: 12px; padding-top: 12px;
+    border-top: 1px solid #334155;
+  }
+  .checkbox-row input[type="checkbox"] {
+    width: 18px; height: 18px; cursor: pointer; accent-color: #38bdf8;
+  }
+  .checkbox-row label {
+    font-size: 0.82rem; color: #94a3b8; cursor: pointer;
+  }
+  .checkbox-row input:checked + label {
+    color: #34d399; text-decoration: line-through;
+  }
+
+  .day-card.completed { opacity: 0.55; border-left-color: #475569; }
+
+  footer {
+    text-align: center; padding: 28px 16px;
+    color: #64748b; font-size: 0.8rem;
+  }
+  .reset-btn {
+    background: #334155;
+    color: #cbd5e1;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    margin-top: 12px;
+  }
+  .reset-btn:hover { background: #475569; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>📘 English Practice Daily</h1>
+    <p>Stage 1 · 30 Hari · 15 Menit/Hari</p>
+    <p style="font-size:0.8rem; margin-top:4px; color:#64748b;">
+      Fokus: Membangun kebiasaan · Output harian
+    </p>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-text" id="progressText">0 / 30 hari selesai</div>
+  </header>
+
+  <div id="daysContainer"></div>
+
+  <footer>
+    <p>💪 Selesaikan 15 menit. Lalu tutup. Besok lagi.</p>
+    <p style="margin-top:6px;">Semua input tersimpan otomatis di browser ini.</p>
+    <button class="reset-btn" onclick="resetAll()">Reset semua progress</button>
+  </footer>
+
+</div>
+
+<script>
+const weeks = [
+  {
+    title: "Minggu 1 · Bangun Kebiasaan",
+    desc: "Fokus: Menulis & berbicara tentang hal sederhana. Jangan takut salah.",
+    days: [
+      { day: 1, type: "writing", topic: "My morning routine",
+        tasks: ["Tulis 3 kalimat tentang pagi harimu.", "Gunakan past tense."],
+        prompt: "This morning I woke up at... I ate... Then I went to...",
+        label: "Tulis 3 kalimat:" },
+      { day: 2, type: "speaking", topic: "My morning routine",
+        tasks: ["Set timer 1 menit.", "Bicara tentang pagi harimu.", "Rekam. Ulangi 3x."],
+        prompt: "Today I woke up at... First... After that... Finally...",
+        label: "Tulis kata kunci (poin):" },
+      { day: 3, type: "writing", topic: "Three things I accomplished yesterday",
+        tasks: ["Tulis 3 kalimat.", "Gunakan 'I managed to...'."],
+        prompt: "Yesterday I managed to... I also managed to... Finally, I managed to...",
+        label: "Tulis 3 kalimat:" },
+      { day: 4, type: "speaking", topic: "Three things I accomplished",
+        tasks: ["Set timer 1 menit.", "First... Second... Third...", "Rekam 3x."],
+        prompt: "Yesterday I accomplished... First... Second... Third...",
+        label: "Tulis kata kunci:" },
+      { day: 5, type: "writing", topic: "My favorite food",
+        tasks: ["Tulis 4 kalimat.", "Gunakan 'because' dan 'but'."],
+        prompt: "My favorite food is... I like it because... But...",
+        label: "Tulis 4 kalimat:" },
+      { day: 6, type: "speaking", topic: "My favorite food",
+        tasks: ["Set timer 1 menit.", "Jelaskan dan beri alasan.", "Rekam 3x."],
+        prompt: "My favorite food is... I like it because... It reminds me of...",
+        label: "Tulis kata kunci:" },
+      { day: 7, type: "review", topic: "Refleksi Minggu 1",
+        tasks: ["Baca ulang tulisanmu.", "Dengarkan rekamanmu.", "Catat 3 kesalahan umum."],
+        prompt: "Minggu ini saya belajar... Kesalahan saya... Minggu depan saya akan...",
+        label: "Tulis refleksimu:" }
+    ]
+  },
+  {
+    title: "Minggu 2 · Tambah Kompleksitas",
+    desc: "Fokus: Kalimat lebih panjang, konektor, dan opini sederhana.",
+    days: [
+      { day: 8, type: "writing", topic: "A difficult day",
+        tasks: ["Tulis 5 kalimat.", "Gunakan 'even though' dan 'because'."],
+        prompt: "Last week I had a difficult day. Even though... because... However...",
+        label: "Tulis 5 kalimat:" },
+      { day: 9, type: "speaking", topic: "A difficult day",
+        tasks: ["Set timer 1 menit.", "Ceritakan hari sulitmu.", "Rekam 3x."],
+        prompt: "One difficult day was when... It started... I felt... In the end...",
+        label: "Tulis kata kunci:" },
+      { day: 10, type: "writing", topic: "My future goals",
+        tasks: ["Tulis 5 kalimat.", "Gunakan 'will' dan 'going to'."],
+        prompt: "In the future, I am going to... I will... My biggest goal is...",
+        label: "Tulis 5 kalimat:" },
+      { day: 11, type: "speaking", topic: "My future goals",
+        tasks: ["Set timer 1 menit.", "Bicara tujuanmu.", "Rekam 3x."],
+        prompt: "My short-term goal is... My long-term goal is... To achieve this, I will...",
+        label: "Tulis 3 tujuan:" },
+      { day: 12, type: "writing", topic: "A person I admire",
+        tasks: ["Tulis 5 kalimat.", "Gunakan 'who' untuk describe orang."],
+        prompt: "The person I admire is... He/She is someone who... I admire him/her because...",
+        label: "Tulis 5 kalimat:" },
+      { day: 13, type: "speaking", topic: "A person I admire",
+        tasks: ["Set timer 1 menit.", "Deskripsikan orang itu.", "Rekam 3x."],
+        prompt: "The person I admire is... He/She is... I admire him/her because...",
+        label: "Tulis kata kunci:" },
+      { day: 14, type: "review", topic: "Refleksi Minggu 2",
+        tasks: ["Bandingkan tulisan Minggu 1 vs 2.", "Apa yang meningkat?", "Tulis 1 paragraf bebas."],
+        prompt: "Minggu ini saya merasa... Yang meningkat... Yang masih sulit...",
+        label: "Tulis refleksimu:" }
+    ]
+  },
+  {
+    title: "Minggu 3 · Opini & Narasi",
+    desc: "Fokus: Mengungkapkan pendapat, bercerita, dan menghubungkan ide.",
+    days: [
+      { day: 15, type: "writing", topic: "Is social media good or bad?",
+        tasks: ["Tulis 5 kalimat.", "Gunakan 'I think', 'However'."],
+        prompt: "In my opinion, social media... On one hand... On the other hand... However...",
+        label: "Tulis pendapatmu:" },
+      { day: 16, type: "speaking", topic: "Social media — good or bad?",
+        tasks: ["Set timer 1 menit.", "Beri pendapat + alasan.", "Rekam 3x."],
+        prompt: "I think social media is... First... However... In my opinion...",
+        label: "Tulis 2 pro & 2 kontra:" },
+      { day: 17, type: "writing", topic: "A memorable trip",
+        tasks: ["Tulis 5 kalimat.", "Gunakan past tense + 'while'."],
+        prompt: "Two years ago, I went to... While we were there... The best part was...",
+        label: "Tulis 5 kalimat:" },
+      { day: 18, type: "speaking", topic: "A memorable trip",
+        tasks: ["Set timer 1 menit.", "Ceritakan liburanmu.", "Rekam 3x."],
+        prompt: "My most memorable trip was to... I went there in... While I was there...",
+        label: "Tulis kata kunci:" },
+      { day: 19, type: "writing", topic: "What I would change",
+        tasks: ["Tulis 5 kalimat.", "Gunakan 'would' dan 'if'."],
+        prompt: "If I could change one thing, I would... Because... This would help...",
+        label: "Tulis 5 kalimat:" },
+      { day: 20, type: "speaking", topic: "What I would change",
+        tasks: ["Set timer 1 menit.", "Bicara tentang perubahan.", "Rekam 3x."],
+        prompt: "If I could change... I would... Because... This would...",
+        label: "Tulis 2-3 perubahan:" },
+      { day: 21, type: "review", topic: "Refleksi Minggu 3",
+        tasks: ["Baca ulang semua tulisan.", "Dengarkan rekaman pertama vs terakhir.", "Tulis 1 kalimat 'although' / 'despite'."],
+        prompt: "Speaking saya sekarang... Writing saya... Yang masih sulit...",
+        label: "Tulis refleksimu:" }
+    ]
+  },
+  {
+    title: "Minggu 4 · Struktur Lanjutan",
+    desc: "Fokus: Kalimat kompleks, saran, dan argumentasi.",
+    days: [
+      { day: 22, type: "writing", topic: "A problem in my community",
+        tasks: ["Tulis 6 kalimat.", "Gunakan 'One solution is...'."],
+        prompt: "One problem is... It happens because... One solution is... This would...",
+        label: "Tulis masalah + solusi:" },
+      { day: 23, type: "speaking", topic: "A problem in my community",
+        tasks: ["Set timer 1 menit.", "Masalah + 2 solusi.", "Rekam 3x."],
+        prompt: "A problem is... One solution is... Another solution is...",
+        label: "Tulis masalah + solusi:" },
+      { day: 24, type: "writing", topic: "A book/movie that changed me",
+        tasks: ["Tulis 6 kalimat.", "Gunakan 'It made me realize...'."],
+        prompt: "The movie that changed me is... It made me realize... Before... Now...",
+        label: "Tulis 6 kalimat:" },
+      { day: 25, type: "speaking", topic: "A book/movie that changed me",
+        tasks: ["Set timer 1 menit.", "Ceritakan + alasan.", "Rekam 3x."],
+        prompt: "The book/movie that changed me is... It made me realize...",
+        label: "Tulis kata kunci:" },
+      { day: 26, type: "writing", topic: "Advice for English learners",
+        tasks: ["Tulis 6 kalimat.", "Gunakan 'should', 'must', 'if I were you'."],
+        prompt: "If I were you, I would... You should... You must... The key is...",
+        label: "Tulis 3 saran:" },
+      { day: 27, type: "speaking", topic: "Advice for English learners",
+        tasks: ["Set timer 1 menit.", "Beri 3 saran.", "Rekam 3x."],
+        prompt: "First, you should... Second, you must... Third, if I were you...",
+        label: "Tulis 3 saran:" },
+      { day: 28, type: "review", topic: "Refleksi Minggu 4",
+        tasks: ["Baca tulisan hari 1-27.", "Dengarkan rekamanmu.", "Tulis 1 paragraf progress."],
+        prompt: "28 hari lalu saya mulai... Sekarang saya... Yang berubah... Saya akan lanjut karena...",
+        label: "Tulis refleksimu:" }
+    ]
+  },
+  {
+    title: "Hari Terakhir · Refleksi & Masa Depan",
+    desc: "Fokus: Melihat kembali perjalananmu & merencanakan langkah berikutnya.",
+    days: [
+      { day: 29, type: "speaking", topic: "My English journey",
+        tasks: ["Set timer 2 menit.", "Ceritakan perjalananmu.", "Rekam. Ulangi 2x."],
+        prompt: "I started learning English when... At first... Then... Now I can... Next goal...",
+        label: "Tulis timeline-mu:" },
+      { day: 30, type: "writing", topic: "A letter to myself in 6 months",
+        tasks: ["Tulis 8 kalimat.", "Apa yang ingin kamu capai?", "Simpan untuk dibaca 6 bulan lagi."],
+        prompt: "Dear future me, By then, I hope... I hope I am no longer... Remember...",
+        label: "Tulis suratmu:" }
+    ]
+  }
+];
+
+const container = document.getElementById('daysContainer');
+let globalDayCounter = 0;
+
+weeks.forEach(w => {
+  const weekHeader = document.createElement('div');
+  weekHeader.className = 'week-header';
+  weekHeader.innerHTML = `<h2>${w.title}</h2><p>${w.desc}</p>`;
+  container.appendChild(weekHeader);
+
+  w.days.forEach(d => {
+    globalDayCounter++;
+    const card = document.createElement('div');
+    card.className = `day-card ${d.type}`;
+    card.id = `card-${d.day}`;
+
+    const typeLabel = d.type === 'speaking' ? '🎤 Speaking'
+                     : d.type === 'writing' ? '✍️ Writing'
+                     : '🔄 Review';
+
+    const tasksHTML = d.tasks.map(t => `<div class="task">${t}</div>`).join('');
+
+    card.innerHTML = `
+      <div class="day-header">
+        <span class="day-number">Day ${d.day}</span>
+        <span class="badge ${d.type}">${typeLabel}</span>
+      </div>
+      <div style="font-size:0.85rem; color:#94a3b8; margin-bottom:6px;">
+        <strong style="color:#38bdf8;">Topik:</strong> ${d.topic}
+      </div>
+      ${tasksHTML}
+
+      <div class="prompt-box">
+        <div class="prompt-title">💡 Contoh / Panduan</div>
+        <div class="prompt-text">${d.prompt}</div>
+      </div>
+
+      <div class="input-area">
+        <label>${d.label}</label>
+        <textarea id="input-${d.day}" data-day="${d.day}"
+          placeholder="Tulis di sini... (tersimpan otomatis)"></textarea>
+        <div class="saved-indicator" id="saved-${d.day}">✓ Tersimpan</div>
+      </div>
+
+      <div class="checkbox-row">
+        <input type="checkbox" id="day-${d.day}" data-day="${d.day}">
+        <label for="day-${d.day}">Selesai hari ini (15 menit)</label>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+});
+
+// ===== STORAGE =====
+const P_KEY = 'engStage1Progress';
+const N_KEY = 'engStage1Notes';
+
+function loadProgress() {
+  try { return JSON.parse(localStorage.getItem(P_KEY)) || {}; }
+  catch { return {}; }
+}
+function saveProgress(p) { localStorage.setItem(P_KEY, JSON.stringify(p)); }
+function loadNotes() {
+  try { return JSON.parse(localStorage.getItem(N_KEY)) || {}; }
+  catch { return {}; }
+}
+function saveNotes(n) { localStorage.setItem(N_KEY, JSON.stringify(n)); }
+
+function updateProgress() {
+  const p = loadProgress();
+  const done = Object.values(p).filter(Boolean).length;
+  document.getElementById('progressFill').style.width = (done / 30 * 100) + '%';
+  document.getElementById('progressText').textContent = `${done} / 30 hari selesai`;
+}
+
+function init() {
+  const p = loadProgress();
+  const n = loadNotes();
+
+  for (let day = 1; day <= 30; day++) {
+    const cb = document.getElementById(`day-${day}`);
+    const card = document.getElementById(`card-${day}`);
+    const ta = document.getElementById(`input-${day}`);
+    const ind = document.getElementById(`saved-${day}`);
+
+    if (!cb) continue;
+
+    if (p[day]) { cb.checked = true; card.classList.add('completed'); }
+    if (n[day]) ta.value = n[day];
+
+    cb.addEventListener('change', () => {
+      const prog = loadProgress();
+      prog[day] = cb.checked;
+      saveProgress(prog);
+      card.classList.toggle('completed', cb.checked);
+      updateProgress();
+    });
+
+    let timer;
+    ta.addEventListener('input', () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        const notes = loadNotes();
+        notes[day] = ta.value;
+        saveNotes(notes);
+        ind.classList.add('show');
+        setTimeout(() => ind.classList.remove('show'), 1200);
+      }, 500);
+    });
+  }
+
+  updateProgress();
+}
+
+function resetAll() {
+  if (!confirm('Hapus semua progress dan tulisan? Tindakan ini tidak bisa dibatalkan.')) return;
+  localStorage.removeItem(P_KEY);
+  localStorage.removeItem(N_KEY);
+  location.reload();
+}
+
+init();
+</script>
+
+</body>
+  </html>
