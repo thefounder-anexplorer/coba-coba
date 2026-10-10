@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>30 Hari Latihan English 5 Menit</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #2d3748;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  h1 {
+    text-align: center;
+    font-size: 26px;
+    color: #4c51bf;
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #718096;
+    font-size: 14px;
+    margin-bottom: 25px;
+  }
+  .progress-wrap {
+    background: #edf2f7;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 25px;
+  }
+  .progress-bar {
+    background: #e2e8f0;
+    height: 14px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .progress-fill {
+    background: linear-gradient(90deg, #48bb78, #38a169);
+    height: 100%;
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+  .progress-text {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #4a5568;
+    font-weight: 600;
+  }
+  .reset-btn {
+    display: block;
+    margin: 12px auto 0;
+    background: #fc8181;
+    color: #fff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .reset-btn:hover { background: #f56565; }
+
+  .day-card {
+    background: #f7fafc;
+    border-left: 5px solid #667eea;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 18px;
+    transition: all 0.3s;
+  }
+  .day-card.done {
+    background: #f0fff4;
+    border-left-color: #48bb78;
+    opacity: 0.85;
+  }
+  .day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .day-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #4c51bf;
+  }
+  .day-card.done .day-title { color: #38a169; }
+  .day-theme {
+    font-size: 12px;
+    background: #667eea;
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+  .day-card.done .day-theme { background: #48bb78; }
+  .tasks {
+    list-style: none;
+    margin-bottom: 12px;
+  }
+  .tasks li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #4a5568;
+    border-bottom: 1px dashed #e2e8f0;
+  }
+  .tasks li:last-child { border-bottom: none; }
+  .tasks input[type="checkbox"] {
+    margin-top: 3px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #48bb78;
+    flex-shrink: 0;
+  }
+  .tasks label { cursor: pointer; flex: 1; }
+  .tasks input:checked + label {
+    text-decoration: line-through;
+    color: #a0aec0;
+  }
+  .example {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-style: italic;
+    color: #2d3748;
+    margin-top: 6px;
+  }
+  .example strong { color: #4c51bf; font-style: normal; }
+
+  @media (max-width: 600px) {
+    .container { padding: 18px; }
+    h1 { font-size: 20px; }
+    .day-title { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>📘 30 Hari Latihan English 5 Menit</h1>
+  <p class="subtitle">Fokus: menggabungkan dua klausa & reported thought</p>
+
+  <div class="progress-wrap">
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-text">
+      <span id="progressLabel">0 / 150 tugas selesai</span>
+      <span id="progressPercent">0%</span>
+    </div>
+    <button class="reset-btn" onclick="resetAll()">🔄 Reset Semua</button>
+  </div>
+
+  <div id="daysContainer"></div>
+</div>
+
+<script>
+  const days = [
+    { theme: "but / yet", focus: "Contrast sederhana",
+      tasks: [
+        "Baca 3 contoh: I thought it would rain, but it didn't.",
+        "Tulis 3 kalimat: I thought + S + would + V, but + S + didn't.",
+        "Ucapkan keras 2x tanpa membaca."
+      ],
+      example: "I thought she would come, but she didn't." },
+    { theme: "although", focus: "Contrast di awal kalimat",
+      tasks: [
+        "Baca: Although I thought it would rain, it didn't.",
+        "Ubah 3 kalimat kemarin jadi bentuk 'Although...'.",
+        "Ucapkan 2x."
+      ],
+      example: "Although I thought he would call, he didn't." },
+    { theme: "however", focus: "Contrast formal",
+      tasks: [
+        "Baca: I thought it would rain; however, it didn't.",
+        "Tulis 3 kalimat dengan '; however,'.",
+        "Perhatikan tanda titik-koma."
+      ],
+      example: "I thought they would win; however, they didn't." },
+    { theme: "because / since", focus: "Sebab",
+      tasks: [
+        "Baca: I stayed home because it was raining.",
+        "Tulis 3 kalimat: S + V + because + S + V.",
+        "Ucapkan 2x."
+      ],
+      example: "I stayed home because it was raining." },
+    { theme: "so / therefore", focus: "Akibat",
+      tasks: [
+        "Baca: It was raining, so I stayed home.",
+        "Tulis 3 kalimat dengan ', so'.",
+        "Ucapkan 2x."
+      ],
+      example: "It was raining, so I stayed home." },
+    { theme: "if / unless", focus: "Kondisi",
+      tasks: [
+        "Baca: If it rains, I will stay home.",
+        "Tulis 3 kalimat: If + S + V, S + will + V.",
+        "Ucapkan 2x."
+      ],
+      example: "If it rains, I will stay home." },
+    { theme: "Review", focus: "Ulang minggu 1",
+      tasks: [
+        "Tulis 5 kalimat gabungan bebas.",
+        "Cek: apakah connector-nya benar?",
+        "Baca keras semua kalimat."
+      ],
+      example: "I thought it would rain, but it didn't." },
+    { theme: "when / while", focus: "Waktu",
+      tasks: [
+        "Baca: When it rained, I stayed home.",
+        "Tulis 3 kalimat dengan 'when'.",
+        "Ucapkan 2x."
+      ],
+      example: "When it rained, I stayed home." },
+    { theme: "after / before", focus: "Urutan waktu",
+      tasks: [
+        "Baca: After it rained, I went out.",
+        "Tulis 3 kalimat dengan 'after' dan 'before'.",
+        "Ucapkan 2x."
+      ],
+      example: "After it rained, I went out." },
+    { theme: "who / which", focus: "Relative clause",
+      tasks: [
+        "Baca: The man who called me is my boss.",
+        "Tulis 3 kalimat dengan 'who' atau 'which'.",
+        "Ucapkan 2x."
+      ],
+      example: "The man who called me is my boss." },
+    { theme: "that", focus: "Relative clause 'that'",
+      tasks: [
+        "Baca: The book that I bought is good.",
+        "Tulis 3 kalimat dengan 'that'.",
+        "Ucapkan 2x."
+      ],
+      example: "The book that I bought is good." },
+    { theme: "thought + would", focus: "Reported thought",
+      tasks: [
+        "Baca: I thought it would rain today.",
+        "Tulis 5 kalimat: I thought + S + would + V.",
+        "Ucapkan 2x."
+      ],
+      example: "I thought it would rain today." },
+    { theme: "was going to", focus: "Alternatif 'would'",
+      tasks: [
+        "Baca: I thought it was going to rain.",
+        "Tulis 3 kalimat dengan 'was going to'.",
+        "Ucapkan 2x."
+      ],
+      example: "I thought it was going to rain." },
+    { theme: "Review", focus: "Ulang minggu 2",
+      tasks: [
+        "Tulis 5 kalimat gabungan bebas.",
+        "Cek: apakah connector-nya benar?",
+        "Baca keras semua kalimat."
+      ],
+      example: "Although I thought it would rain, it didn't." },
+    { theme: "and / also", focus: "Penambahan",
+      tasks: [
+        "Baca: It was cold, and it was windy.",
+        "Tulis 3 kalimat dengan ', and'.",
+        "Ucapkan 2x."
+      ],
+      example: "It was cold, and it was windy." },
+    { theme: "moreover", focus: "Penambahan formal",
+      tasks: [
+        "Baca: It was cold; moreover, it was windy.",
+        "Tulis 3 kalimat dengan '; moreover,'.",
+        "Ucapkan 2x."
+      ],
+      example: "It was cold; moreover, it was windy." },
+    { theme: "not only... but also", focus: "Penambahan kuat",
+      tasks: [
+        "Baca: Not only was it cold, but it was also windy.",
+        "Tulis 3 kalimat dengan pola ini.",
+        "Ucapkan 2x."
+      ],
+      example: "Not only was it cold, but it was also windy." },
+    { theme: "either / or", focus: "Pilihan",
+      tasks: [
+        "Baca: Either you go or I go.",
+        "Tulis 3 kalimat dengan 'either... or'.",
+        "Ucapkan 2x."
+      ],
+      example: "Either you go or I go." },
+    { theme: "neither / nor", focus: "Penolakan ganda",
+      tasks: [
+        "Baca: Neither he nor I went.",
+        "Tulis 3 kalimat dengan 'neither... nor'.",
+        "Ucapkan 2x."
+      ],
+      example: "Neither he nor I went." },
+    { theme: "both... and", focus: "Keduanya",
+      tasks: [
+        "Baca: Both he and I went.",
+        "Tulis 3 kalimat dengan 'both... and'.",
+        "Ucapkan 2x."
+      ],
+      example: "Both he and I went." },
+    { theme: "Review", focus: "Ulang minggu 3",
+      tasks: [
+        "Tulis 5 kalimat gabungan bebas.",
+        "Cek: apakah connector-nya benar?",
+        "Baca keras semua kalimat."
+      ],
+      example: "It was cold, and it was windy." },
+    { theme: "Mixed contrast", focus: "Campuran contrast",
+      tasks: [
+        "Tulis 3 kalimat: but + although + however.",
+        "Ucapkan 2x.",
+        "Cek tanda baca."
+      ],
+      example: "Although I thought it would rain, it didn't; however, it was cloudy." },
+    { theme: "Mixed cause", focus: "Campuran sebab-akibat",
+      tasks: [
+        "Tulis 3 kalimat: because + so.",
+        "Ucapkan 2x.",
+        "Cek tanda baca."
+      ],
+      example: "Because it was raining, I stayed home, so I missed the party." },
+    { theme: "Mixed time", focus: "Campuran waktu",
+      tasks: [
+        "Tulis 3 kalimat: when + after + before.",
+        "Ucapkan 2x.",
+        "Cek tanda baca."
+      ],
+      example: "When it rained, I stayed home after I finished work." },
+    { theme: "Mixed relative", focus: "Campuran relative",
+      tasks: [
+        "Tulis 3 kalimat: who + which + that.",
+        "Ucapkan 2x.",
+        "Cek tanda baca."
+      ],
+      example: "The man who called me bought the book that I wanted." },
+    { theme: "Reported thought mix", focus: "thought + would + but",
+      tasks: [
+        "Tulis 5 kalimat: I thought + S + would + V, but + S + didn't.",
+        "Ucapkan 2x.",
+        "Cek tense."
+      ],
+      example: "I thought it would rain today, but it didn't." },
+    { theme: "Error log", focus: "Perbaiki kesalahan",
+      tasks: [
+        "Buka error log kamu.",
+        "Tulis ulang 5 kesalahan lama dengan benar.",
+        "Ucapkan 2x."
+      ],
+      example: "❌ I thought it today will be raining. → ✅ I thought it would rain today." },
+    { theme: "Writing", focus: "Tulis paragraf pendek",
+      tasks: [
+        "Tulis 1 paragraf 5 kalimat.",
+        "Gunakan minimal 4 connector berbeda.",
+        "Baca keras."
+      ],
+      example: "I thought it would rain today, but it didn't. Although it was cloudy, I went out. Because I had an umbrella, I wasn't worried." },
+    { theme: "Speaking", focus: "Latihan bicara",
+      tasks: [
+        "Rekam suara 1 menit.",
+        "Gunakan minimal 5 kalimat gabungan.",
+        "Dengarkan ulang dan cek."
+      ],
+      example: "I thought she would come, but she didn't. When I called her, she was busy, so I went alone." },
+    { theme: "Final review", focus: "Ulang semua",
+      tasks: [
+        "Tulis 10 kalimat gabungan.",
+        "Cek semua connector & tanda baca.",
+        "Baca keras 2x."
+      ],
+      example: "Although I thought it would rain today, it didn't; however, I still brought an umbrella." }
+  ];
+
+  const STORAGE_KEY = "english30days";
+
+  function loadState() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    return saved ? JSON.parse(saved) : {};
+  }
+  function saveState(state) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  let state = loadState();
+
+  function render() {
+    const container = document.getElementById("daysContainer");
+    container.innerHTML = "";
+
+    days.forEach((day, i) => {
+      const dayNum = i + 1;
+      const card = document.createElement("div");
+      card.className = "day-card";
+
+      const allDone = day.tasks.every((_, t) => state[`${dayNum}-${t}`]);
+      if (allDone) card.classList.add("done");
+
+      let tasksHtml = "";
+      day.tasks.forEach((task, t) => {
+        const key = `${dayNum}-${t}`;
+        const checked = state[key] ? "checked" : "";
+        tasksHtml += `
+          <li>
+            <input type="checkbox" id="${key}" ${checked} onchange="toggle('${key}')">
+            <label for="${key}">${task}</label>
+          </li>`;
+      });
+
+      card.innerHTML = `
+        <div class="day-header">
+          <div class="day-title">Hari ${dayNum}</div>
+          <div class="day-theme">${day.theme}</div>
+        </div>
+        <ul class="tasks">${tasksHtml}</ul>
+        <div class="example"><strong>Contoh:</strong> ${day.example}</div>
+      `;
+      container.appendChild(card);
+    });
+
+    updateProgress();
+  }
+
+  function toggle(key) {
+    state[key] = !state[key];
+    saveState(state);
+    render();
+  }
+
+  function updateProgress() {
+    const total = days.length * 3;
+    const done = Object.values(state).filter(Boolean).length;
+    const percent = Math.round((done / total) * 100);
+    document.getElementById("progressFill").style.width = percent + "%";
+    document.getElementById("progressLabel").textContent = `${done} / ${total} tugas selesai`;
+    document.getElementById("progressPercent").textContent = percent + "%";
+  }
+
+  function resetAll() {
+    if (confirm("Yakin mau reset semua progress?")) {
+      state = {};
+      saveState(state);
+      render();
+    }
+  }
+
+  render();
+</script>
+</body>
+</html>
