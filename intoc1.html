@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Practice Daily — Stage 1 (30 Days)</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    line-height: 1.6;
+    padding: 16px;
+  }
+  .container { max-width: 820px; margin: 0 auto; }
+
+  header {
+    text-align: center;
+    padding: 24px 18px;
+    background: linear-gradient(135deg, #1e293b, #334155);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    border: 1px solid #475569;
+  }
+  header h1 { font-size: 1.5rem; color: #38bdf8; margin-bottom: 6px; }
+  header p { color: #94a3b8; font-size: 0.9rem; }
+
+  .progress-bar {
+    width: 100%; height: 10px; background: #1e293b;
+    border-radius: 5px; margin-top: 16px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #38bdf8, #818cf8);
+    width: 0%; transition: width 0.3s ease;
+  }
+  .progress-text {
+    font-size: 0.8rem; color: #64748b;
+    margin-top: 6px; text-align: center;
+  }
+
+  .week-header {
+    margin: 24px 0 12px;
+    padding: 14px 18px;
+    background: #1e293b;
+    border-radius: 12px;
+    border-left: 4px solid #818cf8;
+  }
+  .week-header h2 { font-size: 1rem; color: #c7d2fe; margin-bottom: 4px; }
+  .week-header p { font-size: 0.82rem; color: #94a3b8; }
+
+  .day-card {
+    background: #1e293b;
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 12px;
+    border-left: 4px solid #38bdf8;
+  }
+  .day-card.speaking { border-left-color: #f472b6; }
+  .day-card.writing { border-left-color: #34d399; }
+  .day-card.review { border-left-color: #fbbf24; }
+
+  .day-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 10px; flex-wrap: wrap; gap: 8px;
+  }
+  .day-number { font-size: 1rem; font-weight: 700; color: #f1f5f9; }
+  .badge {
+    font-size: 0.65rem; font-weight: 700; padding: 4px 10px;
+    border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .badge.speaking { background: #831843; color: #fbcfe8; }
+  .badge.writing { background: #064e3b; color: #a7f3d0; }
+  .badge.review { background: #78350f; color: #fde68a; }
+
+  .task {
+    margin-bottom: 6px; padding-left: 18px; position: relative;
+    color: #cbd5e1; font-size: 0.88rem;
+  }
+  .task::before {
+    content: "→"; position: absolute; left: 0;
+    color: #38bdf8; font-weight: bold;
+  }
+
+  /* ===== MATERIAL SECTION (NEW) ===== */
+  .material {
+    background: #0b1220;
+    border: 1px solid #1e3a5f;
+    border-radius: 10px;
+    padding: 14px;
+    margin-top: 14px;
+  }
+  .material-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #60a5fa;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .material-block {
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed #1e3a5f;
+  }
+  .material-block:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+  .material-block .block-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #818cf8;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .material-block .block-content {
+    font-size: 0.85rem;
+    color: #cbd5e1;
+    line-height: 1.7;
+  }
+  .material-block .block-content strong {
+    color: #fde68a;
+  }
+  .material-block .block-content em {
+    color: #93c5fd;
+    font-style: normal;
+    background: #1e3a5f;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+  }
+  .material-block ul {
+    list-style: none;
+    padding: 0;
+  }
+  .material-block li {
+    padding: 3px 0;
+    font-size: 0.85rem;
+    color: #cbd5e1;
+  }
+  .material-block li strong {
+    color: #fbbf24;
+  }
+  .material-block li .example {
+    color: #94a3b8;
+    font-style: italic;
+    font-size: 0.82rem;
+    display: block;
+    padding-left: 8px;
+    border-left: 2px solid #334155;
+    margin-top: 2px;
+  }
+  .reading-box {
+    background: #172554;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: #dbeafe;
+    line-height: 1.7;
+    font-style: italic;
+    border-left: 3px solid #60a5fa;
+  }
+  .recommend {
+    font-size: 0.83rem;
+    color: #cbd5e1;
+  }
+  .recommend a {
+    color: #38bdf8;
+    text-decoration: none;
+    word-break: break-word;
+  }
+  .recommend a:hover { text-decoration: underline; }
+
+  .prompt-box {
+    background: #172554;
+    border: 1px solid #1e40af;
+    border-radius: 8px;
+    padding: 12px;
+    margin-top: 12px;
+    font-size: 0.85rem;
+  }
+  .prompt-box .prompt-title {
+    color: #60a5fa;
+    font-weight: 700;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .prompt-box .prompt-text {
+    color: #dbeafe;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  .input-area { margin-top: 12px; }
+  .input-area label {
+    display: block;
+    font-size: 0.72rem;
+    color: #94a3b8;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+  .input-area textarea {
+    width: 100%;
+    min-height: 70px;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 10px;
+    color: #e2e8f0;
+    font-family: inherit;
+    font-size: 0.88rem;
+    resize: vertical;
+    line-height: 1.5;
+  }
+  .input-area textarea:focus {
+    outline: none;
+    border-color: #38bdf8;
+  }
+  .saved-indicator {
+    font-size: 0.7rem;
+    color: #34d399;
+    margin-top: 3px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .saved-indicator.show { opacity: 1; }
+
+  .checkbox-row {
+    display: flex; align-items: center; gap: 10px;
+    margin-top: 12px; padding-top: 12px;
+    border-top: 1px solid #334155;
+  }
+  .checkbox-row input[type="checkbox"] {
+    width: 18px; height: 18px; cursor: pointer; accent-color: #38bdf8;
+  }
+  .checkbox-row label {
+    font-size: 0.82rem; color: #94a3b8; cursor: pointer;
+  }
+  .checkbox-row input:checked + label {
+    color: #34d399; text-decoration: line-through;
+  }
+
+  .day-card.completed { opacity: 0.6; border-left-color: #475569; }
+
+  footer {
+    text-align: center; padding: 28px 16px;
+    color: #64748b; font-size: 0.8rem;
+  }
+  .reset-btn {
+    background: #334155;
+    color: #cbd5e1;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    margin-top: 12px;
+  }
+  .reset-btn:hover { background: #475569; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>📘 English Practice Daily</h1>
+    <p>Stage 1 · 30 Hari · 15 Menit/Hari</p>
+    <p style="font-size:0.8rem; margin-top:4px; color:#64748b;">
+      Materi + Latihan + Rekomendasi
+    </p>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-text" id="progressText">0 / 30 hari selesai</div>
+  </header>
+
+  <div id="daysContainer"></div>
+
+  <footer>
+    <p>💪 Baca materi 3 menit. Latihan 10 menit. Refleksi 2 menit.</p>
+    <p style="margin-top:6px;">Semua input tersimpan otomatis di browser ini.</p>
+    <button class="reset-btn" onclick="resetAll()">Reset semua progress</button>
+  </footer>
+
+</div>
+
+<script>
+const weeks = [
+  {
+    title: "Minggu 1 · Bangun Kebiasaan",
+    desc: "Fokus: Past tense dasar + kosakata rutinitas. Input ringan, output sederhana.",
+    days: [
+      {
+        day: 1, type: "writing", topic: "My morning routine",
+        tasks: ["Tulis 3 kalimat tentang pagi harimu.", "Gunakan past tense."],
+        material: {
+          grammar: {
+            title: "Simple Past Tense (Regular Verbs)",
+            content: "Untuk kejadian yang sudah selesai, tambahkan <em>-ed</em> pada verb. <br><strong>wake → woke</strong> (irregular), <strong>walk → walked</strong>, <strong>eat → ate</strong>, <strong>drink → drank</strong>.",
+            example: "I <strong>woke</strong> up at 6. I <strong>drank</strong> coffee. I <strong>went</strong> to work."
+          },
+          vocab: [
+            { word: "routine", meaning: "kegiatan yang biasa dilakukan", example: "My morning routine is simple." },
+            { word: "wake up", meaning: "bangun tidur", example: "I wake up at 5 AM." },
+            { word: "have breakfast", meaning: "sarapan", example: "I have breakfast at 6." },
+            { word: "get dressed", meaning: "berpakaian", example: "I get dressed quickly." },
+            { word: "head to", meaning: "menuju", example: "I head to the office at 7." }
+          ],
+          reading: "Every morning, I wake up at 5:30. I pray, then I have breakfast with my family. After that, I get dressed and head to work. The traffic is usually busy, but I always arrive on time.",
+          recommend: {
+            text: "🎧 Cari di YouTube: <em>“BBC Learning English — Past Simple”</em>",
+            url: "https://www.youtube.com/results?search_query=bbc+learning+english+past+simple"
+          }
+        },
+        prompt: "This morning I woke up at... I ate... Then I went to...",
+        label: "Tulis 3 kalimat:"
+      },
+      {
+        day: 2, type: "speaking", topic: "My morning routine",
+        tasks: ["Set timer 1 menit.", "Bicara tentang pagi harimu.", "Rekam. Ulangi 3x."],
+        material: {
+          grammar: {
+            title: "Time Sequencers",
+            content: "Gunakan kata sambung waktu untuk membuat cerita lebih mengalir: <em>First, Then, After that, Finally</em>.",
+            example: "First, I woke up. Then, I prayed. After that, I had breakfast. Finally, I went to work."
+          },
+          vocab: [
+            { word: "early bird", meaning: "orang yang bangun pagi", example: "I'm an early bird." },
+            { word: "rush", meaning: "terburu-buru", example: "I was in a rush this morning." },
+            { word: "on time", meaning: "tepat waktu", example: "I arrived on time." },
+            { word: "groggy", meaning: "masih mengantuk", example: "I felt groggy at first." },
+            { word: "fresh", meaning: "segar", example: "A shower makes me feel fresh." }
+          ],
+          reading: "An early bird catches the worm. This means people who wake up early have an advantage. Most successful people start their day before 6 AM.",
+          recommend: {
+            text: "🎧 Podcast: <em>“6 Minute English — Morning Routines”</em>",
+            url: "https://www.bbc.co.uk/learningenglish/english/features/6-minute-english"
+          }
+        },
+        prompt: "Today I woke up at... First... After that... Finally...",
+        label: "Tulis kata kunci (poin):"
+      },
+      {
+        day: 3, type: "writing", topic: "Three things I accomplished yesterday",
+        tasks: ["Tulis 3 kalimat.", "Gunakan 'I managed to...'."],
+        material: {
+          grammar: {
+            title: "manage to + verb",
+            content: "<em>manage to</em> berarti berhasil melakukan sesuatu (biasanya sulit). Selalu diikuti verb dasar.",
+            example: "I <strong>managed to</strong> finish my work before 5 PM."
+          },
+          vocab: [
+            { word: "accomplish", meaning: "menyelesaikan", example: "I accomplished three tasks today." },
+            { word: "manage to", meaning: "berhasil", example: "I managed to wake up early." },
+            { word: "deadline", meaning: "tenggat waktu", example: "I met the deadline." },
+            { word: "task", meaning: "tugas", example: "My main task is teaching." },
+            { word: "productive", meaning: "produktif", example: "Today was productive." }
+          ],
+          reading: "Yesterday I managed to finish all my reports. I also managed to help my sister with her homework. Finally, I managed to exercise for 30 minutes. It was a productive day.",
+          recommend: {
+            text: "📖 Baca: <em>“How to Be More Productive” — BBC Worklife</em>",
+            url: "https://www.bbc.com/worklife"
+          }
+        },
+        prompt: "Yesterday I managed to... I also managed to... Finally, I managed to...",
+        label: "Tulis 3 kalimat:"
+      },
+      {
+        day: 4, type: "speaking", topic: "Three things I accomplished",
+        tasks: ["Set timer 1 menit.", "First... Second... Third...", "Rekam 3x."],
+        material: {
+          grammar: {
+            title: "Ordinal Connectors",
+            content: "Untuk daftar, gunakan: <em>First, Second, Third</em> (bukan 'firstly' di speaking santai).",
+            example: "First, I finished my report. Second, I helped my sister. Third, I exercised."
+          },
+          vocab: [
+            { word: "achieve", meaning: "mencapai", example: "I achieved my goal." },
+            { word: "progress", meaning: "kemajuan", example: "I made progress today." },
+            { word: "proud", meaning: "bangga", example: "I'm proud of myself." },
+            { word: "challenging", meaning: "menantang", example: "It was challenging but doable." },
+            { word: "rewarding", meaning: "memuaskan", example: "The result was rewarding." }
+          ],
+          reading: "Small wins matter. Every day, aim to accomplish at least one small task. Over time, these small wins build big results.",
+          recommend: {
+            text: "🎧 Podcast: <em>“TED Talks Daily — Small Wins”</em>",
+            url: "https://www.ted.com/podcasts/ted-talks-daily"
+          }
+        },
+        prompt: "Yesterday I accomplished... First... Second... Third...",
+        label: "Tulis kata kunci:"
+      },
+      {
+        day: 5, type: "writing", topic: "My favorite food",
+        tasks: ["Tulis 4 kalimat.", "Gunakan 'because' dan 'but'."],
+        material: {
+          grammar: {
+            title: "because vs but",
+            content: "<em>because</em> = sebab. <em>but</em> = kontras. Keduanya menghubungkan dua klausa.",
+            example: "I like rendang <strong>because</strong> it's delicious, <strong>but</strong> it's expensive."
+          },
+          vocab: [
+            { word: "delicious", meaning: "lezat", example: "This rendang is delicious." },
+            { word: "spicy", meaning: "pedas", example: "I love spicy food." },
+            { word: "savory", meaning: "gurih", example: "The soup is savory." },
+            { word: "craving", meaning: "keinginan kuat", example: "I have a craving for noodles." },
+            { word: "comfort food", meaning: "makanan yang menenangkan", example: "Rice is my comfort food." }
+          ],
+          reading: "Food is more than fuel. It connects us to our culture and memories. My favorite food, nasi goreng, reminds me of my mother's cooking.",
+          recommend: {
+            text: "📺 YouTube: <em>“Best Indonesian Food — Mark Wiens”</em>",
+            url: "https://www.youtube.com/results?search_query=mark+wiens+indonesian+food"
+          }
+        },
+        prompt: "My favorite food is... I like it because... But...",
+        label: "Tulis 4 kalimat:"
+      },
+      {
+        day: 6, type: "speaking", topic: "My favorite food",
+        tasks: ["Set timer 1 menit.", "Jelaskan dan beri alasan.", "Rekam 3x."],
+        material: {
+          grammar: {
+            title: "Describing with Adjectives",
+            content: "Letakkan adjective sebelum noun: <em>a spicy dish</em>. Atau setelah verb: <em>It tastes spicy</em>.",
+            example: "It's a <strong>spicy</strong> dish. / It tastes <strong>spicy</strong>."
+          },
+          vocab: [
+            { word: "flavor", meaning: "rasa", example: "The flavor is rich." },
+            { word: "texture", meaning: "tekstur", example: "I love the creamy texture." },
+            { word: "aroma", meaning: "aroma", example: "The aroma is amazing." },
+            { word: "portion", meaning: "porsi", example: "The portion is huge." },
+            { word: "mouth-watering", meaning: "menggugah selera", example: "It looks mouth-watering." }
+          ],
+          reading: "Indonesia has over 5,000 traditional recipes. Each region has its own specialty. From Padang's rendang to Java's gudeg, food tells the story of the land.",
+          recommend: {
+            text: "🎧 Podcast: <em>“The Sporkful — Food & Culture”</em>",
+            url: "https://www.sporkful.com/"
+          }
+        },
+        prompt: "My favorite food is... I like it because... It reminds me of...",
+        label: "Tulis kata kunci:"
+      },
+      {
+        day: 7, type: "review", topic: "Refleksi Minggu 1",
+        tasks: ["Baca ulang tulisanmu.", "Dengarkan rekamanmu.", "Catat 3 kesalahan umum."],
+        material: {
+          grammar: {
+            title: "Common Mistakes Minggu 1",
+            content: "Perhatikan pola: <br>1) <em>I go</em> → <strong>I went</strong> (past tense).<br>2) <em>I am manage</em> → <strong>I managed</strong>.<br>3) <em>to hospital</em> → <strong>to the hospital</strong>.",
+            example: "❌ I go to work yesterday. → ✅ I went to work yesterday."
+          },
+          vocab: [
+            { word: "review", meaning: "meninjau ulang", example: "Let's review this week." },
+            { word: "pattern", meaning: "pola", example: "I see a pattern in my mistakes." },
+            { word: "improve", meaning: "memperbaiki", example: "I want to improve my grammar." },
+            { word: "practice", meaning: "latihan", example: "Practice makes progress." },
+            { word: "habit", meaning: "kebiasaan", example: "I'm building a habit." }
+          ],
+          reading: "Reflection is powerful. When you look back at your mistakes, you learn faster. A 5-minute review can save you hours of repeated errors.",
+          recommend: {
+            text: "📺 YouTube: <em>“How to Learn English Faster — TED”</em>",
+            url: "https://www.youtube.com/results?search_query=ted+how+to+learn+english+faster"
+          }
+        },
+        prompt: "Minggu ini saya belajar... Kesalahan saya... Minggu depan saya akan...",
+        label: "Tulis refleksimu:"
+      }
+    ]
+  },
+  {
+    title: "Minggu 2 · Tambah Kompleksitas",
+    desc: "Fokus: Kalimat lebih panjang, konektor, dan opini sederhana.",
+    days: [
+      {
+        day: 8, type: "writing", topic: "A difficult day",
+        tasks: ["Tulis 5 kalimat.", "Gunakan 'even though' dan 'because'."],
+        material: {
+          grammar: {
+            title: "even though vs because",
+            content: "<em>even though</em> = meskipun (kontras kuat). <em>because</em> = karena (sebab).",
+            example: "<strong>Even though</strong> I woke up early, I was late <strong>because</strong> of traffic."
+          },
+          vocab: [
+            { word: "stressful", meaning: "penuh stres", example: "It was a stressful day." },
+            { word: "overwhelmed", meaning: "kewalahan", example: "I felt overwhelmed." },
+            { word: "handle", meaning: "menangani", example: "I handled it well." },
+            { word: "cope with", meaning: "menghadapi", example: "I coped with the pressure." },
+            { word: "get through", meaning: "melewati", example: "I got through the day." }
+          ],
+          reading: "Difficult days teach us the most. When everything goes wrong, we learn what really matters. The key is not to give up.",
+          recommend: {
+            text: "🎧 Podcast: <em>“The Happiness Lab — Resilience”</em>",
+            url: "https://www.pushkin.fm/podcasts/the-happiness-lab-with-dr-laurie-santos"
+          }
+        },
+        prompt: "Last week I had a difficult day. Even though... because... However...",
+        label: "Tulis 5 kalimat:"
+      },
+      {
+        day: 9, type: "speaking", topic: "A difficult day",
+        tasks: ["Set timer 1 menit.", "Ceritakan hari sulitmu.", "Rekam 3x."],
+        material: {
+          grammar: {
+            title: "Past Continuous",
+            content: "<em>was/were + verb-ing</em> untuk aksi yang sedang berlangsung di masa lalu.",
+            example: "I <strong>was working</strong> when the power went out."
+          },
+          vocab: [
+            { word: "frustrated", meaning: "frustrasi", example: "I was frustrated." },
+            { word: "exhausted", meaning: "kelelahan", example: "I was exhausted." },
+            { word: "unexpected", meaning: "tak terduga", example: "Something unexpected happened." },
+            { word: "turn out", meaning: "ternyata", example: "It turned out fine." },
+            { word: "lesson learned", meaning: "pelajaran berharga", example: "A lesson learned." }
+          ],
+          reading: "One difficult day, I was driving to work when my car broke down. I was frustrated at first, but then I called a friend. She helped me and I arrived only 30 minutes late.",
+          recommend: {
+            text: "🎧 Podcast: <em>“6 Minute English — Bad Days”</em>",
+            url: "https://www.bbc.co.uk/learningenglish/english/features/6-minute-english"
+          }
+        },
+        prompt: "One difficult day was when... It started... I felt... In the end...",
+        label: "Tulis kata kunci:"
+      },
+      {
+        day: 10, type: "writing", topic: "My future goals",
+        tasks: ["Tulis 5 kalimat.", "Gunakan 'will' dan 'going to'."],
+        material: {
+          grammar: {
+            title: "will vs going to",
+            content: "<em>will</em> = keputusan spontan / janji. <em>going to</em> = rencana yang sudah dipikirkan.",
+            example: "I <strong>will</strong> call you later. / I <strong>am going to</strong> study tonight."
+          },
+          vocab: [
+            { word: "goal", meaning: "tujuan", example: "My goal is to speak fluently." },
+            { word: "achieve", meaning: "mencapai", example: "I will achieve it." },
+            { word: "step by step", meaning: "bertahap", example: "I'll do it step by step." },
+            { word: "commit", meaning: "berkomitmen", example: "I commit to 15 minutes daily." },
+            { word: "long-term", meaning: "jangka panjang", example: "My long-term goal is C1." }
+          ],
+          reading: "People who write down their goals are 42% more likely to achieve them. Write your goals. Review them weekly. Adjust as needed.",
+          recommend: {
+            text: "📺 TED: <em>“Inside the Mind of a Master Procrastinator”</em>",
+            url: "https://www.ted.com/talks/tim_urban_inside_the_mind_of_a_master_procrastinator"
+          }
+        },
+        prompt: "In the future, I am going to... I will... My biggest goal is...",
+        label: "Tulis 5 kalimat:"
+      },
+      {
+        day: 11, type: "speaking", topic: "My future goals",
+        tasks: ["Set timer 1 menit.", "Bicara tujuanmu.", "Rekam 3x."],
+        material: {
+          grammar: {
+            title: "Talking About Goals",
+            content: "Gunakan: <em>My goal is to + verb</em>. / <em>I want to + verb</em>. / <em>I hope to + verb</em>.",
+            example: "My goal is <strong>to speak</strong> English fluently."
+          },
+          vocab: [
+            { word: "aspire", meaning: "bercita-cita", example: "I aspire to be fluent." },
+            { word: "milestone", meaning: "tonggak", example: "B1 is a milestone." },
+            { word: "consistent", meaning: "konsisten", example: "Be consistent." },
+            { word: "motivation", meaning: "motivasi", example: "My motivation is my family." },
+            { word: "vision", meaning: "visi", example: "My vision is to work abroad." }
+          ],
+          reading: "The journey from B1 to C1 takes time. Most learners need 1-2 years with consistent practice. Don't rush. Focus on daily habits.",
+          recommend: {
+            text: "🎧 Podcast: <em>“The Tim Ferriss Show — Learning Languages”</em>",
+            url: "https://tim.blog/podcast/"
+          }
+        },
+        prompt: "My short-term goal is... My long-term goal is... To achieve this, I will...",
+        label: "Tulis 3 tujuan:"
+      },
+      {
+        day: 12, type: "writing", topic: "A person I admire",
+        tasks: ["Tulis 5 kalimat.", "Gunakan 'who' untuk describe orang."],
+        material: {
+          grammar: {
+            title: "Relative Clause with 'who'",
+            content: "<em>who</em> menghubungkan dua kalimat tentang orang.",
+            example: "She is a woman <strong>who</strong> works hard. (bukan: She is a woman. She works hard.)"
+          },
+          vocab: [
+            { word: "admire", meaning: "mengagumi", example: "I admire my mother." },
+            { word: "inspire", meaning: "menginspirasi", example: "She inspires me." },
+            { word: "role model", meaning: "panutan", example: "He's my role model." },
+            { word: "determined", meaning: "bertekad", example: "She's very determined." },
+            { word: "humble", meaning: "rendah hati", example: "He stays humble." }
+          ],
+          reading: "The person I admire most is my father. He is a man who never gives up. He works hard for our family and always stays humble. I want to be like him.",
+          recommend: {
+            text: "📖 Article: <em>“The Power of Role Models” — Psychology Today</em>",
+            url: "https://www.psychologytoday.com/"
+          }
+        },
+        prompt: "The person I admire is... He/She is someone who... I admire him/her because...",
+        label: "Tulis 5 kalimat:"
+      },
+      {
+        day: 13, type: "speaking", topic: "A person I admire",
+        tasks: ["Set timer 1 menit.", "Deskripsikan orang itu.", "Rekam 3x."],
+        material: {
+          grammar: {
+            title: "Describing People",
+            content: "Gunakan adjective untuk karakter: <em>kind, hardworking, generous, patient</em>.",
+            example: "My mother is <strong>patient</strong> and <strong>kind</strong>."
+          },
+          vocab: [
+            { word: "generous", meaning: "dermawan", example: "He is generous." },
+            { word: "patient", meaning: "sabar", example: "She is patient." },
+            { word: "supportive", meaning: "mendukung", example: "My family is supportive." },
+            { word: "wise", meaning: "bijaksana", example: "My grandmother is wise." },
+            { word: "caring", meaning: "penyayang", example: "He's a caring person." }
+          ],
+          reading: "Role models shape who we become. They show us what is possible. The best role models are not perfect—they are real people who try their best.",
+          recommend: {
+            text: "🎧 Podcast: <em>“The School of Greatness”</em>",
+            url: "https://lewishowes.com/podcast/"
+          }
+        },
+        prompt: "The person I admire is... He/She is... I admire him/her because...",
+        label: "Tulis kata kunci:"
+      },
+      {
+        day: 14, type: "review", topic: "Refleksi Minggu 2",
+        tasks: ["Bandingkan tulisan Minggu 1 vs 2.", "Apa yang meningkat?", "Tulis 1 paragraf bebas."],
+        material: {
+          grammar: {
+            title: "Common Mistakes Minggu 2",
+            content: "1) <em>even if</em> → <strong>even though</strong> (untuk fakta).<br>2) <em>I am going</em> → <strong>I am going to</strong>.<br>3) <em>who is work</em> → <strong>who works</strong>.",
+            example: "❌ I like someone who is work hard. → ✅ I like someone who works hard."
+          },
+          vocab: [
+            { word: "progress", meaning: "kemajuan", example: "I see progress." },
+            { word: "consistent", meaning: "konsisten", example: "I've been consistent." },
+            { word: "review", meaning: "tinjau", example: "Time to review." },
+            { word: "reflect", meaning: "merenung", example: "I reflect on my week." },
+            { word: "celebrate", meaning: "merayakan", example: "Celebrate small wins." }
+          ],
+          reading: "Progress is not always visible day to day. But week to week, it shows. Compare your writing from two weeks ago. You will see the difference.",
+          recommend: {
+            text: "📺 YouTube: <em>“The Power of Reflection”</em>",
+            url: "https://www.youtube.com/results?search_query=power+of+reflection"
+          }
+        },
+        prompt: "Minggu ini saya merasa... Yang meningkat... Yang masih sulit...",
+        label: "Tulis refleksimu:"
+      }
+    ]
+  },
+  {
+    title: "Minggu 3 · Opini & Narasi",
+    desc: "Fokus: Mengungkapkan pendapat, bercerita, dan menghubungkan ide.",
+    days: [
+      {
+        day: 15, type: "writing", topic: "Is social media good or bad?",
+        tasks: ["Tulis 5 kalimat.", "Gunakan 'I think', 'However'."],
+        material: {
+          grammar: {
+            title: "Opinion Phrases",
+            content: "<em>In my opinion, I think, From my perspective, I believe</em> — semua untuk menyampaikan pendapat.",
+            example: "<strong>In my opinion</strong>, social media has both pros and cons."
+          },
+          vocab: [
+            { word: "benefit", meaning: "manfaat", example: "It has many benefits." },
+            { word: "drawback", meaning: "kekurangan", example: "The main drawback is time." },
+            { word: "addictive", meaning: "membuat kecanduan", example: "It can be addictive." },
+            { word: "connect", meaning: "menghubungkan", example: "It connects people." },
+            { word: "misinformation", meaning: "informasi salah", example: "There is a lot of misinformation." }
+          ],
+          reading: "Social media connects billions of people. It allows us to share ideas instantly. However, it also spreads misinformation and can harm mental health.",
+          recommend: {
+            text: "🎧 Podcast: <em>“TED Talks Daily — Social Media”</em>",
+            url: "https://www.ted.com/podcasts/ted-talks-daily"
+          }
+        },
+        prompt: "In my opinion, social media... On one hand... On the other hand... However...",
+        label: "Tulis pendapatmu:"
+      },
+      {
+        day: 16, type: "speaking", topic: "Social media — good or bad?",
+        tasks: ["Set timer 1 menit.", "Beri pendapat + alasan.", "Rekam 3x."],
+        material: {
+          grammar: {
+            title: "Linking Opinions",
+            content: "<em>On one hand... on the other hand...</em> untuk menunjukkan dua sisi. <em>Furthermore, Moreover, In addition</em> untuk menambah.",
+            example: "<strong>On one hand</strong>, it's useful. <strong>On the other hand</strong>, it wastes time."
+          },
+          vocab: [
+            { word: "perspective", meaning: "sudut pandang", example: "From my perspective..." },
+            { word: "argue", meaning: "berpendapat", example: "Some people argue that..." },
+            { word: "evidence", meaning: "bukti", example: "There is evidence that..." },
+            { word: "impact", meaning: "dampak", example: "It has a big impact." },
+            { word: "balance", meaning: "keseimbangan", example: "We need balance." }
+          ],
+          reading: "Is social media good or bad? The answer is: it depends. Used wisely, it's a powerful tool. Used without control, it can harm us.",
+          recommend: {
+            text: "📺 TED: <em>“Is Social Media Hurting Your Mental Health?”</em>",
+            url: "https://www.ted.com/talks/bailey_parnell_is_social_media_hurting_your_mental_health"
+          }
+        },
+        prompt: "I think social media is... First... However... In my opinion...",
+        label: "Tulis 2 pro & 2 kontra:"
+      },
+      {
+        day: 17, type: "writing", topic: "A memorable trip",
+        tasks: ["Tulis 5 kalimat.", "Gunakan past tense + 'while'."],
+        material: {
+          grammar: {
+            title: "while + Past Continuous",
+            content: "<em>while</em> + past continuous untuk aksi yang berlangsung bersamaan.",
+            example: "<strong>While</strong> we <strong>were walking</strong>, it started to rain."
+          },
+          vocab: [
+            { word: "memorable", meaning: "berkesan", example: "It was a memorable trip." },
+            { word: "breathtaking", meaning: "menakjubkan", example: "The view was breathtaking." },
+            { word: "explore", meaning: "menjelajah", example: "We explored the city." },
+            { word: "souvenir", meaning: "suvenir", example: "I bought a souvenir." },
+            { word: "journey", meaning: "perjalanan", example: "The journey was long." }
+          ],
+          reading: "Two years ago, I went to Yogyakarta. While we were visiting Borobudur, the sun rose beautifully. It was the most breathtaking view I have ever seen.",
+          recommend: {
+            text: "📺 YouTube: <em>“Indonesia Travel Vlog”</em>",
+            url: "https://www.youtube.com/results?search_query=indonesia+travel+vlog"
+          }
+        },
+        prompt: "Two years ago, I went to... While we were there... The best part was...",
+        label: "Tulis 5 kalimat:"
+      },
+      {
+        day: 18, type: "speaking", topic: "A memorable trip",
+        tasks: ["Set timer 1 menit.", "Ceritakan liburanmu.", "Rekam 3x."],
+        material: {
+          grammar: {
+            title: "Superlatives",
+            content: "<em>the most + adjective</em> / <em>adjective + -est</em> untuk membandingkan lebih dari dua.",
+            example: "It was <strong>the most beautiful</strong> place I've ever visited."
+          },
+          vocab: [
+            { word: "scenery", meaning: "pemandangan", example: "The scenery was stunning." },
+            { word: "culture", meaning: "budaya", example: "I love the local culture." },
+            { word: "adventure", meaning: "petualangan", example: "It was an adventure." },
+            { word: "unforgettable", meaning: "tak terlupakan", example: "An unforgettable trip." },
+            { word: "local", meaning: "lokal", example: "I tried local food." }
+          ],
+          reading: "Travel changes us. It opens our eyes to new cultures and ways of life. The best trips are not the most expensive—they are the most meaningful.",
+          recommend: {
+            text: "🎧 Podcast: <em>“Zero to Travel”</em>",
+            url: "https://www.zerototravel.com/podcast/"
+          }
+        },
+        prompt: "My most memorable trip was to... I went there in... While I was there...",
+        label: "Tulis kata kunci:"
+      },
+      {
+        day: 19, type: "writing", topic: "What I would change",
+        tasks: ["Tulis 5 kalimat.", "Gunakan 'would' dan 'if'."],
+        material: {
+          grammar: {
+            title: "Second Conditional",
+            content: "<em>If + past simple, would + verb</em> untuk situasi imajiner.",
+            example: "<strong>If I could</strong> change one thing, I <strong>would</strong> start work later."
+          },
+          vocab: [
+            { word: "flexible", meaning: "fleksibel", example: "Flexible hours would help." },
+            { word: "ideal", meaning: "ideal", example: "The ideal situation is..." },
+            { word: "improve", meaning: "memperbaiki", example: "I would improve the system." },
+            { word: "suggest", meaning: "menyarankan", example: "I suggest a change." },
+            { word: "effective", meaning: "efektif", example: "A more effective approach." }
+          ],
+          reading: "If I could change one thing about my workplace, I would make the hours flexible. This would help everyone balance work and life better.",
+          recommend: {
+            text: "📺 TED: <em>“The Way We Work”</em>",
+            url: "https://www.ted.com/topics/work"
+          }
+        },
+        prompt: "If I could change one thing, I would... Because... This would help...",
+        label: "Tulis 5 kalimat:"
+      },
+      {
+        day: 20, type: "speaking", topic: "What I would change",
+        tasks: ["Set timer 1 menit.", "Bicara tentang perubahan.", "Rekam 3x."],
+        material: {
+          grammar: {
+            title: "would + verb",
+            content: "Setelah <em>would</em>, selalu verb dasar (tanpa -s, -ed, -ing).",
+            example: "I <strong>would change</strong> (bukan: would changes / would changed)."
+          },
+          vocab: [
+            { word: "change", meaning: "perubahan", example: "Small changes matter." },
+            { word: "solution", meaning: "solusi", example: "A simple solution." },
+            { word: "challenge", meaning: "tantangan", example: "It's a challenge." },
+            { word: "opportunity", meaning: "peluang", example: "A great opportunity." },
+            { word: "outcome", meaning: "hasil", example: "A better outcome." }
+          ],
+          reading: "Change is hard but necessary. The best changes start small. Ask: What is one thing I would change? Then take one small step today.",
+          recommend: {
+            text: "🎧 Podcast: <em>“The One You Feed”</em>",
+            url: "https://oneyoufeed.net/"
+          }
+        },
+        prompt: "If I could change... I would... Because... This would...",
+        label: "Tulis 2-3 perubahan:"
+      },
+      {
+        day: 21, type: "review", topic: "Refleksi Minggu 3",
+        tasks: ["Baca ulang semua tulisan.", "Dengarkan rekaman pertama vs terakhir.", "Tulis 1 kalimat 'although' / 'despite'."],
+        material: {
+          grammar: {
+            title: "although vs despite",
+            content: "<em>although + clause</em> (subject + verb). <em>despite + noun/-ing</em>.",
+            example: "<strong>Although</strong> it was raining, we went out. / <strong>Despite</strong> the rain, we went out."
+          },
+          vocab: [
+            { word: "nevertheless", meaning: "namun demikian", example: "Nevertheless, I continued." },
+            { word: "however", meaning: "namun", example: "However, it was hard." },
+            { word: "consequently", meaning: "akibatnya", example: "Consequently, I failed." },
+            { word: "therefore", meaning: "oleh karena itu", example: "Therefore, I tried again." },
+            { word: "in contrast", meaning: "sebaliknya", example: "In contrast, she succeeded." }
+          ],
+          reading: "Despite the challenges, you have come this far. Although you may feel stuck, you are moving forward. Progress is not always visible—but it is happening.",
+          recommend: {
+            text: "🎧 Podcast: <em>“The Mindset Mentor”</em>",
+            url: "https://www.mindsetmentor.com/podcast/"
+          }
+        },
+        prompt: "Speaking saya sekarang... Writing saya... Yang masih sulit...",
+        label: "Tulis refleksimu:"
+      }
+    ]
+  },
+  {
+    title: "Minggu 4 · Struktur Lanjutan",
+    desc: "Fokus: Kalimat kompleks, saran, dan argumentasi.",
+    days: [
+      {
+        day: 22, type: "writing", topic: "A problem in my community",
+        tasks: ["Tulis 6 kalimat.", "Gunakan 'One solution is...'."],
+        material: {
+          grammar: {
+            title: "Problem-Solution Structure",
+            content: "Pola: <em>Problem → Cause → Solution → Result</em>. Gunakan <em>One solution is..., This would...</em>",
+            example: "The problem is littering. <strong>One solution is</strong> to add more bins. <strong>This would</strong> reduce waste."
+          },
+          vocab: [
+            { word: "litter", meaning: "sampah", example: "Litter is everywhere." },
+            { word: "flooding", meaning: "banjir", example: "Flooding is common." },
+            { word: "solution", meaning: "solusi", example: "One solution is..." },
+            { word: "awareness", meaning: "kesadaran", example: "Raise awareness." },
+            { word: "community", meaning: "komunitas", example: "Our community needs help." }
+          ],
+          reading: "Many communities face the same problem: too much plastic waste. One solution is to organize weekly clean-ups. Another solution is to educate children in schools.",
+          recommend: {
+            text: "📺 TED: <em>“The Surprising Solution to Ocean Plastic”</em>",
+            url: "https://www.ted.com/talks/david_katz_the_surprising_solution_to_ocean_plastic"
+          }
+        },
+        prompt: "One problem is... It happens because... One solution is... This would...",
+        label: "Tulis masalah + solusi:"
+      },
+      {
+        day: 23, type: "speaking", topic: "A problem in my community",
+        tasks: ["Set timer 1 menit.", "Masalah + 2 solusi.", "Rekam 3x."],
+        material: {
+          grammar: {
+            title: "should / could",
+            content: "<em>should</em> = saran kuat. <em>could</em> = kemungkinan/saran lunak.",
+            example: "We <strong>should</strong> recycle more. We <strong>could</strong> also plant trees."
+          },
+          vocab: [
+            { word: "suggest", meaning: "menyarankan", example: "I suggest a clean-up day." },
+            { word: "address", meaning: "menangani", example: "We must address this issue." },
+            { word: "raise", meaning: "meningkatkan", example: "Raise awareness." },
+            { word: "involve", meaning: "melibatkan", example: "Involve the youth." },
+            { word: "sustainable", meaning: "berkelanjutan", example: "A sustainable plan." }
+          ],
+          reading: "Every community has problems. The best solutions come from the people who live there. Ask: What can we do together? Start small.",
+          recommend: {
+            text: "🎧 Podcast: <em>“TED Talks Daily — Community”</em>",
+            url: "https://www.ted.com/podcasts/ted-talks-daily"
+          }
+        },
+        prompt: "A problem is... One solution is... Another solution is...",
+        label: "Tulis masalah + solusi:"
+      },
+      {
+        day: 24, type: "writing", topic: "A book/movie that changed me",
+        tasks: ["Tulis 6 kalimat.", "Gunakan 'It made me realize...'."],
+        material: {
+          grammar: {
+            title: "make + object + verb",
+            content: "<em>make someone realize/think/feel</em>.",
+            example: "The movie <strong>made me realize</strong> that failure is temporary."
+          },
+          vocab: [
+            { word: "perspective", meaning: "sudut pandang", example: "It changed my perspective." },
+            { word: "inspired", meaning: "terinspirasi", example: "I felt inspired." },
+            { word: "realize", meaning: "menyadari", example: "I realized something important." },
+            { word: "plot", meaning: "alur", example: "The plot was amazing." },
+            { word: "character", meaning: "tokoh", example: "My favorite character is..." }
+          ],
+          reading: "The movie 'The Pursuit of Happyness' changed my perspective. It made me realize that failure is not the end. Before watching it, I gave up easily. Now, I try again when things get hard.",
+          recommend: {
+            text: "📺 YouTube: <em>“The Pursuit of Happyness — Trailer”</em>",
+            url: "https://www.youtube.com/results?search_query=pursuit+of+happyness+trailer"
+          }
+        },
+        prompt: "The movie that changed me is... It made me realize... Before... Now...",
+        label: "Tulis 6 kalimat:"
+      },
+      {
+        day: 25, type: "speaking", topic: "A book/movie that changed me",
+        tasks: ["Set timer 1 menit.", "Ceritakan + alasan.", "Rekam 3x."],
+        material: {
+          grammar: {
+            title: "used to + verb",
+            content: "<em>used to</em> untuk kebiasaan masa lalu yang sudah berubah.",
+            example: "I <strong>used to</strong> give up easily. Now I don't."
+          },
+          vocab: [
+            { word: "insight", meaning: "wawasan", example: "It gave me insight." },
+            { word: "meaningful", meaning: "bermakna", example: "A meaningful story." },
+            { word: "lesson", meaning: "pelajaran", example: "The lesson is clear." },
+            { word: "transform", meaning: "mengubah", example: "It transformed my thinking." },
+            { word: "motivate", meaning: "memotivasi", example: "It motivated me." }
+          ],
+          reading: "Stories have power. A single book or movie can change how we see the world. The right story at the right time can transform us.",
+          recommend: {
+            text: "🎧 Podcast: <em>“What Should I Read Next?”</em>",
+            url: "https://whatshouldireadnext.libsyn.com/"
+          }
+        },
+        prompt: "The book/movie that changed me is... It made me realize...",
+        label: "Tulis kata kunci:"
+      },
+      {
+        day: 26, type: "writing", topic: "Advice for English learners",
+        tasks: ["Tulis 6 kalimat.", "Gunakan 'should', 'must', 'if I were you'."],
+        material: {
+          grammar: {
+            title: "Giving Advice",
+            content: "<em>should</em> = saran. <em>must</em> = keharusan. <em>if I were you, I would...</em> = saran personal.",
+            example: "You <strong>should</strong> practice daily. You <strong>must</strong> be patient. <strong>If I were you</strong>, I would find a tutor."
+          },
+          vocab: [
+            { word: "consistent", meaning: "konsisten", example: "Be consistent." },
+            { word: "patient", meaning: "sabar", example: "Be patient." },
+            { word: "immerse", meaning: "membenamkan diri", example: "Immerse yourself in English." },
+            { word: "review", meaning: "tinjau", example: "Review every week." },
+            { word: "progress", meaning: "kemajuan", example: "Progress takes time." }
+          ],
+          reading: "If I were you, I would practice English every day, even for 15 minutes. You should not be afraid of mistakes. You must be patient. Progress will come.",
+          recommend: {
+            text: "📺 YouTube: <em>“How to Learn Any Language” — Steve Kaufmann</em>",
+            url: "https://www.youtube.com/results?search_query=steve+kaufmann+language+learning"
+          }
+        },
+        prompt: "If I were you, I would... You should... You must... The key is...",
+        label: "Tulis 3 saran:"
+      },
+      {
+        day: 27, type: "speaking", topic: "Advice for English learners",
+        tasks: ["Set timer 1 menit.", "Beri 3 saran.", "Rekam 3x."],
+        material: {
+          grammar: {
+            title: "Sequencing Advice",
+            content: "Gunakan <em>First... Second... Third...</em> atau <em>Firstly... Secondly... Finally...</em>",
+            example: "<strong>First</strong>, practice daily. <strong>Second</strong>, find a tutor. <strong>Finally</strong>, be patient."
+          },
+          vocab: [
+            { word: "advice", meaning: "saran", example: "Here's my advice." },
+            { word: "tip", meaning: "tips", example: "A useful tip." },
+            { word: "strategy", meaning: "strategi", example: "A good strategy." },
+            { word: "routine", meaning: "rutinitas", example: "Build a routine." },
+            { word: "mindset", meaning: "pola pikir", example: "Change your mindset." }
+          ],
+          reading: "The best advice for learners: be consistent, be patient, and be kind to yourself. Mistakes are not failures—they are steps forward.",
+          recommend: {
+            text: "🎧 Podcast: <em>“The Language Mastery Show”</em>",
+            url: "https://languagemastery.com/podcast/"
+          }
+        },
+        prompt: "First, you should... Second, you must... Third, if I were you...",
+        label: "Tulis 3 saran:"
+      },
+      {
+        day: 28, type: "review", topic: "Refleksi Minggu 4",
+        tasks: ["Baca tulisan hari 1-27.", "Dengarkan rekamanmu.", "Tulis 1 paragraf progress."],
+        material: {
+          grammar: {
+            title: "Present Perfect for Progress",
+            content: "<em>have/has + past participle</em> untuk menyatakan apa yang sudah kamu capai.",
+            example: "I <strong>have improved</strong> my writing. I <strong>have become</strong> more confident."
+          },
+          vocab: [
+            { word: "achievement", meaning: "pencapaian", example: "This is an achievement." },
+            { word: "milestone", meaning: "tonggak", example: "A major milestone." },
+            { word: "journey", meaning: "perjalanan", example: "It's a journey." },
+            { word: "grateful", meaning: "bersyukur", example: "I'm grateful for this." },
+            { word: "continue", meaning: "melanjutkan", example: "I'll continue." }
+          ],
+          reading: "28 days ago, you started this challenge. Now you have written 28 days of English. You have spoken, reflected, and grown. Be proud.",
+          recommend: {
+            text: "📺 YouTube: <em>“The Power of Consistency”</em>",
+            url: "https://www.youtube.com/results?search_query=power+of+consistency"
+          }
+        },
+        prompt: "28 hari lalu saya mulai... Sekarang saya... Yang berubah... Saya akan lanjut karena...",
+        label: "Tulis refleksimu:"
+      }
+    ]
+  },
+  {
+    title: "Hari Terakhir · Refleksi & Masa Depan",
+    desc: "Fokus: Melihat kembali perjalananmu & merencanakan langkah berikutnya.",
+    days: [
+      {
+        day: 29, type: "speaking", topic: "My English journey",
+        tasks: ["Set timer 2 menit.", "Ceritakan perjalananmu.", "Rekam. Ulangi 2x."],
+        material: {
+          grammar: {
+            title: "Past → Present → Future",
+            content: "Ceritakan perjalanan: gunakan past (dulu), present (sekarang), future (rencana).",
+            example: "I <strong>started</strong> at B1. Now I <strong>am</strong> more confident. Soon I <strong>will reach</strong> C1."
+          },
+          vocab: [
+            { word: "journey", meaning: "perjalanan", example: "My English journey." },
+            { word: "growth", meaning: "pertumbuhan", example: "I see growth." },
+            { word: "confidence", meaning: "kepercayaan diri", example: "My confidence grew." },
+            { word: "dedication", meaning: "dedikasi", example: "Dedication pays off." },
+            { word: "commitment", meaning: "komitmen", example: "I made a commitment." }
+          ],
+          reading: "Every learner has a story. Yours is one of courage and consistency. You started. You continued. You grew. This is not the end—it is the beginning.",
+          recommend: {
+            text: "🎧 Podcast: <em>“The English Learning Journey”</em>",
+            url: "https://www.bbc.co.uk/learningenglish"
+          }
+        },
+        prompt: "I started learning English when... At first... Then... Now I can... Next goal...",
+        label: "Tulis timeline-mu:"
+      },
+      {
+        day: 30, type: "writing", topic: "A letter to myself in 6 months",
+        tasks: ["Tulis 8 kalimat.", "Apa yang ingin kamu capai?", "Simpan untuk dibaca 6 bulan lagi."],
+        material: {
+          grammar: {
+            title: "Future Perfect",
+            content: "<em>will have + past participle</em> untuk menyatakan apa yang akan sudah tercapai.",
+            example: "By December, I <strong>will have reached</strong> B2."
+          },
+          vocab: [
+            { word: "reflect", meaning: "merenung", example: "Reflect on the future." },
+            { word: "aspire", meaning: "bercita-cita", example: "I aspire to be fluent." },
+            { word: "envision", meaning: "membayangkan", example: "I envision success." },
+            { word: "dedicate", meaning: "mendedikasikan", example: "I dedicate 15 minutes daily." },
+            { word: "grateful", meaning: "bersyukur", example: "Be grateful for progress." }
+          ],
+          reading: "Write a letter to your future self. Tell them what you hope has happened. Tell them to keep going. Then, seal it. Open it in 6 months.",
+          recommend: {
+            text: "📺 YouTube: <em>“Letter to Your Future Self”</em>",
+            url: "https://www.youtube.com/results?search_query=letter+to+your+future+self"
+          }
+        },
+        prompt: "Dear future me, By then, I hope... I hope I am no longer... Remember...",
+        label: "Tulis suratmu:"
+      }
+    ]
+  }
+];
+
+const container = document.getElementById('daysContainer');
+
+weeks.forEach(w => {
+  const weekHeader = document.createElement('div');
+  weekHeader.className = 'week-header';
+  weekHeader.innerHTML = `<h2>${w.title}</h2><p>${w.desc}</p>`;
+  container.appendChild(weekHeader);
+
+  w.days.forEach(d => {
+    const card = document.createElement('div');
+    card.className = `day-card ${d.type}`;
+    card.id = `card-${d.day}`;
+
+    const typeLabel = d.type === 'speaking' ? '🎤 Speaking'
+                     : d.type === 'writing' ? '✍️ Writing'
+                     : '🔄 Review';
+
+    const tasksHTML = d.tasks.map(t => `<div class="task">${t}</div>`).join('');
+
+    // Material HTML
+    let materialHTML = '';
+    if (d.material) {
+      const m = d.material;
+      const vocabHTML = m.vocab ? m.vocab.map(v =>
+        `<li><strong>${v.word}</strong> — ${v.meaning}
+          <span class="example">"${v.example}"</span>
+        </li>`).join('') : '';
+
+      materialHTML = `
+        <div class="material">
+          <div class="material-title">📚 Materi Hari Ini</div>
+
+          <div class="material-block">
+            <div class="block-label">📐 Grammar</div>
+            <div class="block-content">
+              <strong>${m.grammar.title}</strong><br>
+              ${m.grammar.content}<br>
+              <em>Example:</em> ${m.grammar.example}
+            </div>
+          </div>
+
+          <div class="material-block">
+            <div class="block-label">📝 Vocabulary (5 kata)</div>
+            <ul>${vocabHTML}</ul>
+          </div>
+
+          <div class="material-block">
+            <div class="block-label">📖 Reading (2-3 kalimat)</div>
+            <div class="reading-box">${m.reading}</div>
+          </div>
+
+          <div class="material-block">
+            <div class="block-label">🎧 Rekomendasi</div>
+            <div class="recommend">
+              ${m.recommend.text}<br>
+              <a href="${m.recommend.url}" target="_blank" rel="noopener">${m.recommend.url}</a>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    card.innerHTML = `
+      <div class="day-header">
+        <span class="day-number">Day ${d.day}</span>
+        <span class="badge ${d.type}">${typeLabel}</span>
+      </div>
+      <div style="font-size:0.85rem; color:#94a3b8; margin-bottom:6px;">
+        <strong style="color:#38bdf8;">Topik:</strong> ${d.topic}
+      </div>
+      ${tasksHTML}
+      ${materialHTML}
+
+      <div class="prompt-box">
+        <div class="prompt-title">💡 Contoh / Panduan</div>
+        <div class="prompt-text">${d.prompt}</div>
+      </div>
+
+      <div class="input-area">
+        <label>${d.label}</label>
+        <textarea id="input-${d.day}" data-day="${d.day}"
+          placeholder="Tulis di sini... (tersimpan otomatis)"></textarea>
+        <div class="saved-indicator" id="saved-${d.day}">✓ Tersimpan</div>
+      </div>
+
+      <div class="checkbox-row">
+        <input type="checkbox" id="day-${d.day}" data-day="${d.day}">
+        <label for="day-${d.day}">Selesai hari ini (15 menit)</label>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+});
+
+// ===== STORAGE =====
+const P_KEY = 'engStage1Progress';
+const N_KEY = 'engStage1Notes';
+
+function loadProgress() {
+  try { return JSON.parse(localStorage.getItem(P_KEY)) || {}; }
+  catch { return {}; }
+}
+function saveProgress(p) { localStorage.setItem(P_KEY, JSON.stringify(p)); }
+function loadNotes() {
+  try { return JSON.parse(localStorage.getItem(N_KEY)) || {}; }
+  catch { return {}; }
+}
+function saveNotes(n) { localStorage.setItem(N_KEY, JSON.stringify(n)); }
+
+function updateProgress() {
+  const p = loadProgress();
+  const done = Object.values(p).filter(Boolean).length;
+  document.getElementById('progressFill').style.width = (done / 30 * 100) + '%';
+  document.getElementById('progressText').textContent = `${done} / 30 hari selesai`;
+}
+
+function init() {
+  const p = loadProgress();
+  const n = loadNotes();
+
+  for (let day = 1; day <= 30; day++) {
+    const cb = document.getElementById(`day-${day}`);
+    const card = document.getElementById(`card-${day}`);
+    const ta = document.getElementById(`input-${day}`);
+    const ind = document.getElementById(`saved-${day}`);
+
+    if (!cb) continue;
+
+    if (p[day]) { cb.checked = true; card.classList.add('completed'); }
+    if (n[day]) ta.value = n[day];
+
+    cb.addEventListener('change', () => {
+      const prog = loadProgress();
+      prog[day] = cb.checked;
+      saveProgress(prog);
+      card.classList.toggle('completed', cb.checked);
+      updateProgress();
+    });
+
+    let timer;
+    ta.addEventListener('input', () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        const notes = loadNotes();
+        notes[day] = ta.value;
+        saveNotes(notes);
+        ind.classList.add('show');
+        setTimeout(() => ind.classList.remove('show'), 1200);
+      }, 500);
+    });
+  }
+
+  updateProgress();
+}
+
+function resetAll() {
+  if (!confirm('Hapus semua progress dan tulisan? Tindakan ini tidak bisa dibatalkan.')) return;
+  localStorage.removeItem(P_KEY);
+  localStorage.removeItem(N_KEY);
+  location.reload();
+}
+
+init();
+</script>
+
+</body>
+</html>
